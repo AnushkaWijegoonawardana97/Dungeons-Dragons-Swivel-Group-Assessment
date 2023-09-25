@@ -20,17 +20,16 @@ export const getSpells = () => async (dispatch: (arg0: { type: string; payload: 
 
 }
 
-export const getSpell = (name: string) => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+export const getCurrentSpell = (name: any) => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
     try {
         setLoading();
-
         const response = await fetch(`https://www.dnd5eapi.co/api/spells/${name}`);
         const data = await response.json();
-        console.log('...........', data)
+
 
         dispatch({
             type: GET_CURRENT_SPELL,
-            payload: data.results
+            payload: data
         })
     } catch (error: any) {
         dispatch({

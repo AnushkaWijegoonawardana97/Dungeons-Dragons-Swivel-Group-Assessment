@@ -2,7 +2,6 @@ import { Favorite, Visibility } from "@mui/icons-material";
 import { Button, Card, CardContent, IconButton, Stack, Typography } from "@mui/material";
 import { FC, ReactElement } from 'react';
 import { connect } from "react-redux";
-import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom";
 import { addFavourites, removeFavourites } from "../../actions/spellsAction";
 
@@ -57,6 +56,8 @@ SpellCard.propTypes = {
 
 const mapStateToProps = (state: any) => ({
     favourites: state.spell.favourites,
+    currentSpell: state.spell.currentSpell,
+    loading: state.spell.loading
 })
 
 export default connect(mapStateToProps, { addFavourites, removeFavourites })(SpellCard)

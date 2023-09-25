@@ -2,7 +2,7 @@ import { ADD_FAVOUTITES, GET_CURRENT_SPELL, GET_FAVOUTITES, GET_SPELLS, REMOVE_F
 
 const initialState = {
     spells: null,
-    currentSpell: null,
+    currentSpell: {},
     favourites: [],
     loading: false,
     error: null
@@ -19,6 +19,7 @@ export default (state: any = initialState, action: {
                 loading: false
             }
         case GET_CURRENT_SPELL:
+        console.log(action.payload, 'action.payload GET_CURRENT_SPELL')
             return {
                 ...state,
                 currentSpell: action.payload,
