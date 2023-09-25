@@ -1,7 +1,8 @@
 import axios from "axios";
+import { Dispatch } from "redux";
 import { ADD_FAVOUTITES, GET_CURRENT_SPELL, GET_FAVOUTITES, GET_SPELLS, REMOVE_FAVOUTITES, SET_LOADING, SPELLS_ERROR } from "./types";
 
-export const getSpells = () => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+export const getSpells = () => async (dispatch: Dispatch<{ type: string; payload: any; }>) => {
     try {
         setLoading();
 
@@ -20,7 +21,7 @@ export const getSpells = () => async (dispatch: (arg0: { type: string; payload: 
 
 }
 
-export const getCurrentSpell = (name: any) => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+export const getCurrentSpell = (name: string) => async (dispatch: Dispatch<{ type: string; payload: any; }>) => {
     try {
         setLoading();
 
@@ -39,7 +40,7 @@ export const getCurrentSpell = (name: any) => async (dispatch: (arg0: { type: st
 
 }
 
-export const addFavourites = (spell: any) => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+export const addFavourites = (spell: any) => async (dispatch: Dispatch<{ type: string; payload: any; }>) => {
     try {
         setLoading();
         dispatch({
@@ -54,7 +55,7 @@ export const addFavourites = (spell: any) => async (dispatch: (arg0: { type: str
     }
 }
 
-export const getFavourites = () => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+export const getFavourites = () => async (dispatch: Dispatch<{ type: string; payload: any; }>) => {
     try {
         setLoading();
         dispatch({
@@ -69,7 +70,7 @@ export const getFavourites = () => async (dispatch: (arg0: { type: string; paylo
     }
 }
 
-export const removeFavourites = (spell: any, favourites: any) => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
+export const removeFavourites = (spell: any, favourites: any) => async (dispatch: Dispatch<{ type: string; payload: any; }>) => {
     try {
         setLoading();
         const newFavourites = favourites.filter((el: any) => el.index !== spell.index)

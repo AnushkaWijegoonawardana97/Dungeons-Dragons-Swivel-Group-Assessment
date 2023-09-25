@@ -1,7 +1,7 @@
-import { Menu } from "@mui/icons-material";
-import { AppBar, Box, IconButton, Toolbar, styled } from "@mui/material";
-import PropTypes from "prop-types";
 import { FC, ReactElement } from 'react';
+import { AppBar, Box, IconButton, Toolbar, styled, Typography } from "@mui/material";
+import PropTypes from "prop-types";
+import { Menu } from "@mui/icons-material";
 import { HEADER_DESKTOP, HEADER_MOBILE, NAV_WIDTH } from '../../utils/Constant';
 import { bgBlur } from "../../utils/cssStyles";
 

@@ -5,7 +5,14 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addFavourites, removeFavourites } from "../../actions/spellsAction";
 
-const SpellCard: FC<any> = ({ spell, favourites, addFavourites, removeFavourites }): ReactElement => {
+interface SpellCardProps {
+    spell: any;
+    favourites: any[];
+    addFavourites: (spell: any) => void;
+    removeFavourites: (spell: any, favourites: any[]) => void;
+}
+
+const SpellCard: FC<SpellCardProps> = ({ spell, favourites, addFavourites, removeFavourites }): ReactElement => {
     const navigate = useNavigate();
 
     const onFavouriteButtonClick = () => {
