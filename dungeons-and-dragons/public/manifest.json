@@ -1,6 +1,14 @@
 {
-  "name": "Dungeons & Dragons",
-  "short_name": "PawJS",
+  "name": "Dungeons & Dragons || Swivel Group Assignment",
+  "short_name": "Swivel D&D",
+  "dir": "ltr",
+  "lang": "en-US",
+  "orientation": "any",
+  "start_url": "/",
+  "background_color": "#F9FAFB",
+  "theme_color": "#f7ce65",
+  "display": "standalone",
+  "description": "A highly scalable & plug-able, Progressive Web Application foundation with the best Developer Experience.",
   "icons": [
     {
       "src": "/android-icon-36x36.png",
