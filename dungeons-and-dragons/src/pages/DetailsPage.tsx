@@ -23,15 +23,6 @@ const DetailsPage: FC<DetailsPageProps> = ({ currentSpell, loading, getCurrentSp
     }, [])
 
     const onFavouriteButtonClick = () => {
-        // if (favourites.length === 0) {
-        //     addFavourites(spell)
-        // } else {
-        //     if (favourites.includes(spell)) {
-        //         removeFavourites(spell, favourites)
-        //     } else {
-        //         addFavourites(spell)
-        //     }
-        // }
         console.log('....')
     }
 
@@ -49,7 +40,6 @@ const DetailsPage: FC<DetailsPageProps> = ({ currentSpell, loading, getCurrentSp
                         title="green iguana"
                     />
                 </Card>
-                {/* src="https://source.unsplash.com/random?wallpapers" */}
                 <Stack direction="row" sx={{ mb: 3 }}>
                     <Typography variant="h4" sx={{ flexGrow: 1 }}>
                         {currentSpell?.name}
@@ -238,14 +228,14 @@ const DetailsPage: FC<DetailsPageProps> = ({ currentSpell, loading, getCurrentSp
                             xs: 'repeat(2, 1fr)',
                             md: 'repeat(4, 1fr)',
                         }}
-                    > 
-                    {currentSpell?.components?.map((component: string) => <Stack
-                        spacing={1}
-                        direction="row"
-                        alignItems="center"
                     >
-                        <Avatar> {component}</Avatar>
-                    </Stack>)}
+                        {currentSpell?.components?.map((component: string) => <Stack
+                            spacing={1}
+                            direction="row"
+                            alignItems="center"
+                        >
+                            <Avatar> {component}</Avatar>
+                        </Stack>)}
                     </Box>
                 </Stack>
             </Stack>

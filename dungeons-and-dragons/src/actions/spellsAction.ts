@@ -1,15 +1,15 @@
+import axios from "axios";
 import { ADD_FAVOUTITES, GET_CURRENT_SPELL, GET_FAVOUTITES, GET_SPELLS, REMOVE_FAVOUTITES, SET_LOADING, SPELLS_ERROR } from "./types";
 
 export const getSpells = () => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
     try {
         setLoading();
 
-        const response = await fetch('https://www.dnd5eapi.co/api/spells');
-        const data = await response.json();
+        const response: any = await axios.get('https://www.dnd5eapi.co/api/spells');
 
         dispatch({
             type: GET_SPELLS,
-            payload: data.results
+            payload: response.data.results
         })
     } catch (error: any) {
         dispatch({
@@ -23,13 +23,12 @@ export const getSpells = () => async (dispatch: (arg0: { type: string; payload: 
 export const getCurrentSpell = (name: any) => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
     try {
         setLoading();
-        const response = await fetch(`https://www.dnd5eapi.co/api/spells/${name}`);
-        const data = await response.json();
 
+        const response: any = await axios.get(`https://www.dnd5eapi.co/api/spells/${name}`);
 
         dispatch({
             type: GET_CURRENT_SPELL,
-            payload: data
+            payload: response.data
         })
     } catch (error: any) {
         dispatch({
