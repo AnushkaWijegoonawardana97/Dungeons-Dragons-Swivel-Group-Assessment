@@ -1,6 +1,20 @@
 import { ADD_FAVOUTITES, GET_CURRENT_SPELL, GET_FAVOUTITES, GET_SPELLS, REMOVE_FAVOUTITES, SET_LOADING, SPELLS_ERROR } from "../actions/types";
 
-const initialState = {
+interface Spell {
+    id: number;
+    name: string;
+    description: string;
+}
+
+interface State {
+    spells: Spell[] | null;
+    currentSpell: any | null;
+    favourites: Spell[];
+    loading: boolean;
+    error: string | null;
+}
+
+const initialState: State = {
     spells: null,
     currentSpell: {},
     favourites: [],
@@ -8,9 +22,7 @@ const initialState = {
     error: null
 }
 
-export default (state: any = initialState, action: {
-    payload(payload: any): unknown; type: any;
-}) => {
+const reducer = (state: State = initialState, action: { payload: any; type: any; }): State => {
     switch (action.type) {
         case GET_SPELLS:
             return {
@@ -19,7 +31,7 @@ export default (state: any = initialState, action: {
                 loading: false
             }
         case GET_CURRENT_SPELL:
-        console.log(action.payload, 'action.payload GET_CURRENT_SPELL')
+            console.log(action.payload, 'action.payload GET_CURRENT_SPELL')
             return {
                 ...state,
                 currentSpell: action.payload,
@@ -57,3 +69,5 @@ export default (state: any = initialState, action: {
             return state;
     }
 }
+
+export default reducer;

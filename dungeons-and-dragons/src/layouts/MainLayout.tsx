@@ -1,12 +1,16 @@
-import { Box, CssBaseline, Toolbar, Container } from "@mui/material"
-import PropTypes from 'prop-types'
-import { FC, ReactElement, useState } from 'react'
-import AppBarMenu from "../components/layouts/AppBarMenu"
-import DrawerMenu from "../components/layouts/DrawerMenu"
-import CopyRight from "../components/component/CopyRight"
+import { Box, Container, Toolbar } from "@mui/material";
+import PropTypes from 'prop-types';
+import { FC, ReactElement, ReactNode, useState } from 'react';
+import CopyRight from "../components/component/CopyRight";
+import AppBarMenu from "../components/layouts/AppBarMenu";
+import DrawerMenu from "../components/layouts/DrawerMenu";
 
-const MainLayout: FC<any> = ({ children }): ReactElement => {
-    const [open, setOpen] = useState(false);
+interface MainLayoutProps {
+    children: ReactNode;
+}
+
+const MainLayout: FC<MainLayoutProps> = ({ children }): ReactElement => {
+    const [open, setOpen] = useState<boolean>(false);
 
     return (
         <>
@@ -23,11 +27,11 @@ const MainLayout: FC<any> = ({ children }): ReactElement => {
             </Box>
             <CopyRight sx={{ pb: 5 }} />
         </>
-    )
+    );
 }
 
 MainLayout.propTypes = {
     children: PropTypes.node.isRequired
 }
 
-export default MainLayout
+export default MainLayout;

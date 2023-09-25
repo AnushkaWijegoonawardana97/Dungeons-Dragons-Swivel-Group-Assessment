@@ -1,16 +1,21 @@
-import { List } from "@mui/icons-material";
-import { Box, Button, LinearProgress, Stack, Typography } from "@mui/material";
-import PropTypes from "prop-types";
 import { FC, ReactElement, useEffect } from 'react';
 import { connect } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { getSpells } from "../actions/spellsAction";
-import CopyRight from "../components/component/CopyRight";
 import SpellCard from "../components/component/SpellCard";
 import MainLayout from '../layouts/MainLayout';
 
+import { Box, Button, LinearProgress, Stack, Typography } from "@mui/material";
+import { List } from "@mui/icons-material";
+import PropTypes from "prop-types";
 
-const LandingPage: FC<any> = ({ spells, loading, getSpells }): ReactElement => {
+interface LandingPageProps {
+    spells: any;
+    loading: boolean;
+    getSpells: () => void;
+}
+
+const LandingPage: FC<LandingPageProps> = ({ spells, loading, getSpells }): ReactElement => {
     useEffect(() => {
         getSpells()
     }, [])
@@ -22,7 +27,7 @@ const LandingPage: FC<any> = ({ spells, loading, getSpells }): ReactElement => {
                 display='grid'
                 gridTemplateColumns={{
                     xs: "repeat(1, 1fr)",
-                    sm: "repeat(2, 1fr)",
+                    sm: "2fr 1fr",
                 }}
                 alignItems={"center"}
                 sx={{ mb: 5 }}>
@@ -80,7 +85,7 @@ const LandingPage: FC<any> = ({ spells, loading, getSpells }): ReactElement => {
                     {
                         (loading || spells === null) ? <LinearProgress sx={{
                             gridColumn: "1/4",
-                        }} /> : <>{spells.slice(0, 4).map((spell: any) => <SpellCard key={spell.index} spell={spell} />)}</>
+                        }} /> : <>{spells.slice(0, 8).map((spell: any) => <SpellCard key={spell.index} spell={spell} />)}</>
                     }
                 </Box>
             </Box>

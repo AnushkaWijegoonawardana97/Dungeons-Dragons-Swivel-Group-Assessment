@@ -1,23 +1,23 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { FC, ReactElement } from 'react';
 import { Link, Typography } from '@mui/material';
+import { FC, ReactElement } from 'react';
 
-const CopyRight: FC<any> = (props): ReactElement => {
+interface CopyRightProps {
+    [key: string]: any;
+}
+
+const CopyRight: FC<CopyRightProps> = (props): ReactElement => {
     return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props} >
+        <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
+            <Link color="inherit" href="https://github.com/AnushkaWijegoonawardana97/Dungeons-Dragons-Swivel-Group-Assessment">
+                Github Code
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
-    )
-}
+    );
+};
 
-CopyRight.propTypes = {
+CopyRight.propTypes = {};
 
-}
-
-export default CopyRight
+export default CopyRight;

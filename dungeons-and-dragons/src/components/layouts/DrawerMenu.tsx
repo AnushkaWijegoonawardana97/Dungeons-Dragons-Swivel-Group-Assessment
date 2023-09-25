@@ -1,12 +1,17 @@
-import { Box, Drawer } from "@mui/material"
-import { FC, ReactElement, useEffect } from 'react'
-import { useLocation } from "react-router-dom"
-import { NAV_WIDTH } from '../../utils/Constant'
-import NavigationRenderContent from "./NavigationRenderContent"
-import useResponsive from "../../hooks/useResponsive"
+import { FC, ReactElement, useEffect } from 'react';
+import { useLocation } from "react-router-dom";
+import { Box, Drawer } from "@mui/material";
+import { NAV_WIDTH } from '../../utils/Constant';
+import NavigationRenderContent from "./NavigationRenderContent";
+import useResponsive from "../../hooks/useResponsive";
 
-const DrawerMenu: FC<any> = ({ openNav, onCloseNav }): ReactElement => {
-    const isDesktop = useResponsive("up", "lg");
+interface DrawerMenuProps {
+    openNav: boolean;
+    onCloseNav: () => void;
+}
+
+const DrawerMenu: FC<DrawerMenuProps> = ({ openNav, onCloseNav }): ReactElement => {
+    const isDesktop: boolean = useResponsive("up", "lg");
     const { pathname } = useLocation();
 
     useEffect(() => {
@@ -50,7 +55,7 @@ const DrawerMenu: FC<any> = ({ openNav, onCloseNav }): ReactElement => {
                 </Drawer>
             )}
         </Box>
-    )
+    );
 }
 
-export default DrawerMenu
+export default DrawerMenu;

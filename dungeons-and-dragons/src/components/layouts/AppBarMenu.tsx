@@ -1,11 +1,15 @@
 import { Menu } from "@mui/icons-material";
-import { AppBar, Box, IconButton, Stack, Toolbar, styled, Typography } from "@mui/material";
+import { AppBar, Box, IconButton, Toolbar, styled } from "@mui/material";
+import PropTypes from "prop-types";
 import { FC, ReactElement } from 'react';
 import { HEADER_DESKTOP, HEADER_MOBILE, NAV_WIDTH } from '../../utils/Constant';
 import { bgBlur } from "../../utils/cssStyles";
-import PropTypes from "prop-types";
 
-const StyledRoot = styled(AppBar)(({ theme }) => ({
+interface AppBarMenuProps {
+    onOpenNav: () => void;
+}
+
+const StyledRoot = styled(AppBar)(({ theme }): any => ({
     ...bgBlur({ color: theme.palette.background.default }),
     boxShadow: "none",
     [theme.breakpoints.up("lg")]: {
@@ -13,7 +17,7 @@ const StyledRoot = styled(AppBar)(({ theme }) => ({
     },
 }));
 
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+const StyledToolbar = styled(Toolbar)(({ theme }): any => ({
     minHeight: HEADER_MOBILE,
     [theme.breakpoints.up("lg")]: {
         minHeight: HEADER_DESKTOP,
@@ -21,8 +25,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     },
 }));
 
-
-const AppBarMenu: FC<any> = ({ onOpenNav }): ReactElement => {
+const AppBarMenu: FC<AppBarMenuProps> = ({ onOpenNav }): ReactElement => {
     return (
         <StyledRoot>
             <StyledToolbar>
@@ -59,4 +62,4 @@ AppBarMenu.propTypes = {
     onOpenNav: PropTypes.func.isRequired,
 }
 
-export default AppBarMenu
+export default AppBarMenu;

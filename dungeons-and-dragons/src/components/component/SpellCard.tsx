@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addFavourites, removeFavourites } from "../../actions/spellsAction";
 
-
-
 const SpellCard: FC<any> = ({ spell, favourites, addFavourites, removeFavourites }): ReactElement => {
     const navigate = useNavigate();
 

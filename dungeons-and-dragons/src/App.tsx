@@ -1,14 +1,13 @@
+import React, { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import DetailsPage from './pages/DetailsPage';
+import FavouritePage from './pages/FavouritePage';
+import SpellsList from './pages/SpellsList';
+import { Provider } from 'react-redux';
+import store from './store';
 
-import { Route, Routes } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import DetailsPage from "./pages/DetailsPage";
-import FavouritePage from "./pages/FavouritePage";
-import SpellsList from "./pages/SpellsList";
-import { Provider } from "react-redux";
-import store from "./store";
-
-
-function App() {
+const App: FC = () => {
   return (
     <Provider store={store}>
       <Routes>

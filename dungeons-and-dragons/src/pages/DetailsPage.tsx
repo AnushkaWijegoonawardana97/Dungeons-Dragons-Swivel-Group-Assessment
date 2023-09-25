@@ -1,13 +1,20 @@
 import { FC, ReactElement, useEffect } from 'react';
-import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getCurrentSpell } from "../actions/spellsAction";
 import MainLayout from '../layouts/MainLayout';
-import { LinearProgress, Stack, Divider, Typography, IconButton, Box, Avatar, ListItemText } from "@mui/material"
-import { Favorite, StackedBarChart, AutoFixNormal, TrackChanges } from "@mui/icons-material";
 
-const DetailsPage: FC<any> = ({ currentSpell, loading, getCurrentSpell }): ReactElement => {
+import { Favorite, StackedBarChart, TrackChanges } from "@mui/icons-material";
+import { Avatar, Box, Card, CardMedia, Divider, IconButton, LinearProgress, ListItemText, Stack, Typography } from "@mui/material";
+import PropTypes from 'prop-types';
+
+interface DetailsPageProps {
+    currentSpell: any;
+    loading: boolean;
+    getCurrentSpell: (spell: any) => void;
+}
+
+const DetailsPage: FC<DetailsPageProps> = ({ currentSpell, loading, getCurrentSpell }): ReactElement => {
     const location = useLocation()
 
     useEffect(() => {
@@ -35,6 +42,14 @@ const DetailsPage: FC<any> = ({ currentSpell, loading, getCurrentSpell }): React
     return (
         <MainLayout>
             <Stack >
+                <Card sx={{ mb: 5 }}>
+                    <CardMedia
+                        sx={{ height: 250 }}
+                        image="/detailsBg.jpg"
+                        title="green iguana"
+                    />
+                </Card>
+                {/* src="https://source.unsplash.com/random?wallpapers" */}
                 <Stack direction="row" sx={{ mb: 3 }}>
                     <Typography variant="h4" sx={{ flexGrow: 1 }}>
                         {currentSpell?.name}
@@ -137,6 +152,57 @@ const DetailsPage: FC<any> = ({ currentSpell, loading, getCurrentSpell }): React
                             }}
                         />
                     </Stack>
+
+                    <Stack spacing={1.5} direction="row">
+                        <ListItemText
+                            primary={"Damage Type"}
+                            secondary={currentSpell?.damage?.damage_type?.name}
+                            primaryTypographyProps={{
+                                typography: 'body2',
+                                color: 'text.secondary',
+                                mb: 0.5,
+                            }}
+                            secondaryTypographyProps={{
+                                typography: 'subtitle2',
+                                color: 'text.primary',
+                                component: 'span',
+                            }}
+                        />
+                    </Stack>
+
+                    <Stack spacing={1.5} direction="row">
+                        <ListItemText
+                            primary={"School Name"}
+                            secondary={currentSpell?.school?.name}
+                            primaryTypographyProps={{
+                                typography: 'body2',
+                                color: 'text.secondary',
+                                mb: 0.5,
+                            }}
+                            secondaryTypographyProps={{
+                                typography: 'subtitle2',
+                                color: 'text.primary',
+                                component: 'span',
+                            }}
+                        />
+                    </Stack>
+
+                    <Stack spacing={1.5} direction="row">
+                        <ListItemText
+                            primary={"Classes Name"}
+                            secondary={currentSpell?.classes?.name}
+                            primaryTypographyProps={{
+                                typography: 'body2',
+                                color: 'text.secondary',
+                                mb: 0.5,
+                            }}
+                            secondaryTypographyProps={{
+                                typography: 'subtitle2',
+                                color: 'text.primary',
+                                component: 'span',
+                            }}
+                        />
+                    </Stack>
                 </Box>
 
 
@@ -149,18 +215,19 @@ const DetailsPage: FC<any> = ({ currentSpell, loading, getCurrentSpell }): React
                         {currentSpell?.desc}
                     </Box>
 
-                    <Typography variant="h6">Higher Level</Typography>
+                    {currentSpell?.higher_level && <><Typography variant="h6">Higher Level</Typography>
 
-                    <Box component="div" sx={{ typography: 'paragraph' }}>
-                        {currentSpell?.higher_level}
-                    </Box>
+                        <Box component="div" sx={{ typography: 'paragraph' }}>
+                            {currentSpell?.higher_level}
+                        </Box></>}
 
- {currentSpell?.material && <><Typography variant="h6">Material</Typography>
 
-                    <Box component="div" sx={{ typography: 'paragraph' }}>
-                        {currentSpell?.material}
-                    </Box></>}
-                    
+                    {currentSpell?.material && <><Typography variant="h6">Material</Typography>
+
+                        <Box component="div" sx={{ typography: 'paragraph' }}>
+                            {currentSpell?.material}
+                        </Box></>}
+
 
                     <Typography variant="h6">Components</Typography>
 
@@ -168,21 +235,18 @@ const DetailsPage: FC<any> = ({ currentSpell, loading, getCurrentSpell }): React
                         rowGap={2}
                         display="grid"
                         gridTemplateColumns={{
-                            xs: 'repeat(1, 1fr)',
-                            md: 'repeat(2, 1fr)',
+                            xs: 'repeat(2, 1fr)',
+                            md: 'repeat(4, 1fr)',
                         }}
-                    > {currentSpell?.components?.map((component: string) => <Stack
+                    > 
+                    {currentSpell?.components?.map((component: string) => <Stack
                         spacing={1}
                         direction="row"
                         alignItems="center"
                     >
                         <Avatar> {component}</Avatar>
                     </Stack>)}
-
                     </Box>
-
-
-
                 </Stack>
             </Stack>
         </MainLayout >

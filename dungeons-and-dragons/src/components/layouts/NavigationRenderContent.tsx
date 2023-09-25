@@ -1,16 +1,12 @@
-import {
-    Box,
-    IconButton,
-    List, ListItemButton,
-    ListItemIcon,
-    styled
-} from "@mui/material";
+import { Favorite, GitHub, Home, ViewList } from "@mui/icons-material";
+import { Box, IconButton, List } from "@mui/material";
 import { FC, ReactElement } from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
-import { Menu, GitHub, Home, ViewList, Favorite } from "@mui/icons-material"
+import { useNavigate } from "react-router-dom";
 
-const NavigationRenderContent: FC<any> = (props: any): ReactElement => {
-    const { pathname } = useLocation();
+interface NavigationRenderContentProps {
+}
+
+const NavigationRenderContent: FC<NavigationRenderContentProps> = (props: NavigationRenderContentProps): ReactElement => {
     const navigate = useNavigate();
 
     return (
@@ -53,7 +49,8 @@ const NavigationRenderContent: FC<any> = (props: any): ReactElement => {
                     sx={{
                         mr: 1,
                         color: "text.primary",
-                    }}>
+                    }}
+                >
                     <GitHub />
                 </IconButton>
             </Box>
@@ -61,8 +58,4 @@ const NavigationRenderContent: FC<any> = (props: any): ReactElement => {
     )
 }
 
-NavigationRenderContent.propTypes = {
-
-}
-
-export default NavigationRenderContent
+export default NavigationRenderContent;

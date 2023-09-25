@@ -5,13 +5,13 @@ import {
   createTheme,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import colorPalette from "./colorPalette";
+import customShadows from "./customShadows";
+import GlobalStyles from "./globalStyles";
+import ComponentsOverrides from "./overrides";
 import shadows from "./shadows";
 import typography from "./typography";
-import GlobalStyles from "./globalStyles";
-import customShadows from "./customShadows";
-import ComponentsOverrides from "./overrides";
 
 const ThemeProvider = ({ children }) => {
   const themeOptions = useMemo(
