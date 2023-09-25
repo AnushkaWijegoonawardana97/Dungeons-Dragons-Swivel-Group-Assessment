@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { Route, Routes } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import DetailsPage from "./pages/DetailsPage";
+import FavouritePage from "./pages/FavouritePage";
+import SpellsList from "./pages/SpellsList";
+import { Provider } from "react-redux";
+import store from "./store";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/spells" element={<SpellsList />} />
+        <Route path="/details" element={<DetailsPage />} />
+        <Route path="/favourites" element={<FavouritePage />} />
+      </Routes>
+    </Provider>
   );
 }
 
