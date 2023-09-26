@@ -1,7 +1,7 @@
-import { FC, ReactElement, useEffect } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { getCurrentSpell } from "../actions/spellsAction";
+import { addFavourites, getCurrentSpell, removeFavourites } from "../actions/spellsAction";
 import MainLayout from '../layouts/MainLayout';
 
 import { Favorite, StackedBarChart, TrackChanges } from "@mui/icons-material";
@@ -11,10 +11,16 @@ import PropTypes from 'prop-types';
 interface DetailsPageProps {
     currentSpell: any;
     loading: boolean;
+    favourites: any[];
     getCurrentSpell: (spell: any) => void;
+    addFavourites: (spell: any) => void;
+    removeFavourites: (spell: any, favourites: any[]) => void;
 }
 
-const DetailsPage: FC<DetailsPageProps> = ({ currentSpell, loading, getCurrentSpell }): ReactElement => {
+const DetailsPage: FC<DetailsPageProps> = ({ favourites, currentSpell, loading, getCurrentSpell, addFavourites, removeFavourites }): ReactElement => {
+    const [isFavourite, setIsFavourite] = useState(false)
+    const [favouritesArr, setFavouriteArr] = useState(favourites)
+
     const location = useLocation()
 
     useEffect(() => {
@@ -22,8 +28,30 @@ const DetailsPage: FC<DetailsPageProps> = ({ currentSpell, loading, getCurrentSp
         getCurrentSpell(location.state.spell)
     }, [])
 
+    useEffect(() => {
+        const newFavourites = favouritesArr?.map(item => item.index);
+        console.log(newFavourites)
+        if (newFavourites.includes(currentSpell.index)) {
+            setIsFavourite(true)
+        }
+    }, [favouritesArr])
+
+
     const onFavouriteButtonClick = () => {
-        console.log('....')
+        const spell = {
+            index: currentSpell.index,
+            name: currentSpell.name,
+            url: currentSpell.url
+        }
+        if (favourites.length === 0) {
+            addFavourites(spell)
+        } else {
+            if (favourites.includes(spell)) {
+                removeFavourites(spell, favourites)
+            } else {
+                addFavourites(spell)
+            }
+        }
     }
 
     if (loading || currentSpell === null) {
@@ -45,7 +73,7 @@ const DetailsPage: FC<DetailsPageProps> = ({ currentSpell, loading, getCurrentSp
                         {currentSpell?.name}
                     </Typography>
 
-                    <IconButton onClick={onFavouriteButtonClick}>
+                    <IconButton onClick={onFavouriteButtonClick} color={isFavourite ? 'error' : 'default'}>
                         <Favorite />
                     </IconButton>
                 </Stack>
@@ -250,7 +278,8 @@ DetailsPage.propTypes = {
 
 const mapStateToProps = (state: any) => ({
     currentSpell: state.spell.currentSpell,
+    favourites: state.spell.favourites,
     loading: state.spell.loading
 })
 
-export default connect(mapStateToProps, { getCurrentSpell })(DetailsPage)
+export default connect(mapStateToProps, { getCurrentSpell, addFavourites, removeFavourites })(DetailsPage)
