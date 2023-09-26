@@ -1,6 +1,6 @@
 import { Favorite, Visibility } from "@mui/icons-material";
 import { Button, Card, CardContent, IconButton, Stack, Typography } from "@mui/material";
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addFavourites, removeFavourites } from "../../actions/spellsAction";
@@ -13,6 +13,7 @@ interface SpellCardProps {
 }
 
 const SpellCard: FC<SpellCardProps> = ({ spell, favourites, addFavourites, removeFavourites }): ReactElement => {
+    const [isFavourite, setIsFavourite] = useState(false)
     const navigate = useNavigate();
 
     const onFavouriteButtonClick = () => {
@@ -35,6 +36,15 @@ const SpellCard: FC<SpellCardProps> = ({ spell, favourites, addFavourites, remov
         })
     }
 
+    useEffect(() => {
+        if (favourites.includes(spell)) {
+            setIsFavourite(true)
+        } else {
+            setIsFavourite(false)
+        }
+    }, [favourites])
+
+
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardContent>
@@ -43,7 +53,7 @@ const SpellCard: FC<SpellCardProps> = ({ spell, favourites, addFavourites, remov
                 </Typography>
 
                 <Stack direction='row' spacing={1} alignItems={'center'} justifyContent={"space-between"} sx={{ width: '100%' }}>
-                    <IconButton onClick={onFavouriteButtonClick}>
+                    <IconButton onClick={onFavouriteButtonClick} color={isFavourite ? 'error' : 'default'}>
                         <Favorite />
                     </IconButton>
                     <Button variant="contained" startIcon={<Visibility />} onClick={onViewButtonHandler}>
